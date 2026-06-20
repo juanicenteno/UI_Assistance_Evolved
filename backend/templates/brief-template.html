@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brief - {{name}}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{#each fontsGoogle}}
+    <link href="https://fonts.googleapis.com/css2?family={{fontUrl}}:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    {{/each}}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #141519;
+            color: #f2f2f7;
+            line-height: 1.4;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1152px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
+
+        .card {
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 1.25rem;
+            background: #1a1b23;
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            margin-bottom: 1.25rem;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: #00c4cc;
+        }
+
+        .gradient-text {
+            background: linear-gradient(100deg, #00c4cc, #7d2ae8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 196, 204, 0.4);
+            background: rgba(0, 196, 204, 0.1);
+            padding: 0.375rem 0.875rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #00c4cc;
+        }
+
+        .header-name {
+            margin-top: 1rem;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 640px) {
+            .header-name {
+                font-size: 2.25rem;
+            }
+        }
+
+        .tagline {
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #f5c842;
+        }
+
+        .description {
+            margin-top: 0.75rem;
+            max-width: 48rem;
+            color: #a8a8b8;
+        }
+
+        /* Images */
+        .header-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .header-image-card {
+            overflow: hidden;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: rgba(38, 39, 46, 0.2);
+            text-align: center;
+        }
+
+        .header-image-card .img-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            min-height: 80px;
+            max-height: 120px;
+        }
+
+        .header-image-card img {
+            max-height: 100px;
+            max-width: 100%;
+            width: auto;
+            border-radius: 0.5rem;
+            object-fit: contain;
+        }
+
+        .header-image-card figcaption {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.4rem 0.75rem;
+            font-size: 0.75rem;
+            color: #a8a8b8;
+        }
+
+        /* Two-col layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 1024px) {
+            .two-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Colors */
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .colors-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .colors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .color-swatch {
+            overflow: hidden;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .color-swatch .swatch-color {
+            height: 6rem;
+            width: 100%;
+        }
+
+        .color-swatch .swatch-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            background: rgba(38, 39, 46, 0.4);
+            padding: 0.625rem 0.75rem;
+        }
+
+        .color-swatch .swatch-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .color-swatch .swatch-hex {
+            font-family: monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #a8a8b8;
+        }
+
+        /* Typography */
+        .typo-space {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .typo-card {
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: rgba(38, 39, 46, 0.2);
+            padding: 1.25rem;
+        }
+
+        .typo-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #a8a8b8;
+        }
+
+        .typo-heading-sample {
+            margin-top: 0.25rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .typo-body-sample {
+            margin-top: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        /* Voice */
+        .voice-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.625rem;
+        }
+
+        .voice-chip {
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 196, 204, 0.4);
+            background: rgba(0, 196, 204, 0.1);
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #00c4cc;
+        }
+
+        /* Persona */
+        .persona-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .persona-grid {
+                grid-template-columns: auto 1fr;
+            }
+        }
+
+        .persona-avatar-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .persona-avatar-col {
+                align-items: flex-start;
+            }
+        }
+
+        .persona-avatar-col img {
+            width: 7rem;
+            height: 7rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            object-fit: cover;
+        }
+
+        .persona-name {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f5c842;
+        }
+
+        .persona-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.625rem 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 640px) {
+            .persona-details-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: #a8a8b8;
+        }
+
+        .detail-value {
+            font-weight: 500;
+        }
+
+        .persona-bio {
+            margin-top: 1rem;
+            color: #a8a8b8;
+        }
+
+        .persona-lists {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .persona-lists {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .persona-list-card {
+            border-radius: 1rem;
+            background: rgba(38, 39, 46, 0.2);
+            padding: 1rem;
+        }
+
+        .persona-list-card.motivations {
+            border-left: 2px solid #00c4cc;
+        }
+
+        .persona-list-card.frustrations {
+            border-left: 2px solid #7d2ae8;
+        }
+
+        .persona-list-card h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .persona-list-card ul {
+            list-style: none;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #a8a8b8;
+        }
+
+        .persona-list-card li {
+            margin-bottom: 0.25rem;
+        }
+
+        .persona-list-card li::before {
+            content: "•";
+            margin-right: 0.5rem;
+        }
+
+        .persona-list-card.motivations li::before {
+            color: #00c4cc;
+        }
+
+        .persona-list-card.frustrations li::before {
+            color: #7d2ae8;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
+            color: #a8a8b8;
+            font-size: 0.75rem;
+        }
+
+        @media print {
+            body {
+                background: #141519;
+                color: #f2f2f7;
+            }
+            .card {
+                break-inside: avoid;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header + imágenes -->
+        <div class="card">
+            <div class="badge">Brief generado con IA</div>
+            <h1 class="header-name gradient-text">{{name}}</h1>
+            {{#if tagline}}<p class="tagline">{{tagline}}</p>{{/if}}
+            <p class="description">{{description}}</p>
+            <div class="header-images">
+                <figure class="header-image-card">
+                    <div class="img-wrap">
+                        {{#if logoUrl}}
+                        <img src="{{logoUrl}}" alt="Logo de marca">
+                        {{else}}
+                        <span style="color:#a8a8b8;font-size:0.75rem;">Generando imagen...</span>
+                        {{/if}}
+                    </div>
+                    <figcaption>Logo</figcaption>
+                </figure>
+                <figure class="header-image-card">
+                    <div class="img-wrap">
+                        {{#if mockupUrl}}
+                        <img src="{{mockupUrl}}" alt="Mockup de marca">
+                        {{else}}
+                        <span style="color:#a8a8b8;font-size:0.75rem;">Generando imagen...</span>
+                        {{/if}}
+                    </div>
+                    <figcaption>Mockup</figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <!-- Paleta + tipografía -->
+        <div class="two-col">
+            <div class="card">
+                <h2 class="card-title">Paleta de colores</h2>
+                <div class="colors-grid">
+                    {{#each colors}}
+                    <div class="color-swatch">
+                        <div class="swatch-color" style="background-color:{{hex}}"></div>
+                        <div class="swatch-label">
+                            <div>
+                                <p class="swatch-name">{{name}}</p>
+                                <p class="swatch-hex">{{hex}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">Tipografías</h2>
+                <div class="typo-space">
+                    <div class="typo-card">
+                        <p class="typo-label">Títulos · {{headingFont}}</p>
+                        <p class="typo-heading-sample" style="font-family:'{{headingFont}}','Inter',sans-serif;">
+                            The quick brown fox jumps over the lazy dog
+                        </p>
+                    </div>
+                    <div class="typo-card">
+                        <p class="typo-label">Cuerpo · {{bodyFont}}</p>
+                        <p class="typo-body-sample" style="font-family:'{{bodyFont}}','Inter',sans-serif;">
+                            The quick brown fox jumps over the lazy dog
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tono de voz -->
+        {{#if voice.length}}
+        <div class="card">
+            <h2 class="card-title">Tono de voz</h2>
+            <div class="voice-wrap">
+                {{#each voice}}
+                <span class="voice-chip">{{this}}</span>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- User Persona -->
+        <div class="card">
+            <h2 class="card-title">User Persona</h2>
+            <div class="persona-grid">
+                <div class="persona-avatar-col">
+                    <img src="{{personaAvatar}}" alt="Avatar">
+                    <p class="persona-name">{{persona.name}}</p>
+                </div>
+                <div>
+                    <div class="persona-details-grid">
+                        <div><p class="detail-label">Edad</p><p class="detail-value">{{persona.age}} años</p></div>
+                        <div><p class="detail-label">Estudios</p><p class="detail-value">{{persona.education}}</p></div>
+                        <div><p class="detail-label">Situación</p><p class="detail-value">{{persona.situacion}}</p></div>
+                        <div><p class="detail-label">Ocupación</p><p class="detail-value">{{persona.ocupation}}</p></div>
+                        <div><p class="detail-label">País</p><p class="detail-value">{{persona.country}}</p></div>
+                        <div><p class="detail-label">Hijos</p><p class="detail-value">{{persona.hijos}}</p></div>
+                    </div>
+                    {{#if persona.description}}
+                    <p class="persona-bio">{{persona.description}}</p>
+                    {{/if}}
+                    <div class="persona-lists">
+                        <div class="persona-list-card motivations">
+                            <h3>Motivaciones</h3>
+                            <ul>
+                                {{#each persona.motivations}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="persona-list-card frustrations">
+                            <h3>Frustraciones</h3>
+                            <ul>
+                                {{#each persona.frustrations}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Generado por BriefAssist
+        </div>
+    </div>
+</body>
+</html>
