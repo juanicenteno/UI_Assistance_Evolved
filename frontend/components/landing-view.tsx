@@ -29,15 +29,15 @@ export function LandingView({ onStart }: { onStart: () => void }) {
       <section className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 sm:p-12">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-accent/25 blur-3xl"
+          className="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-[#0023934f] blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-20 size-72 rounded-full bg-primary/15 blur-3xl"
+          className="pointer-events-none absolute -bottom-32 -left-20 size-72 rounded-full bg-[#8047e14f] blur-3xl"
         />
 
         <div className="relative max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3.5 py-1.5 text-xs font-medium text-primary">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#fdce3271] bg-[#fdce3215] px-3.5 py-1.5 text-xs font-medium text-[#fdcd32]">
             <Sparkles className="size-3.5" />
             Asistente de branding con IA
           </span>
@@ -55,7 +55,7 @@ export function LandingView({ onStart }: { onStart: () => void }) {
             {TAGS.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-border bg-secondary/60 px-3.5 py-1.5 text-sm text-muted-foreground"
+                className="rounded-full border border-border hover:border-amber-300 bg-secondary/60 px-3.5 py-1.5 text-sm text-muted-foreground hover:text-amber-300 transition-all cursor-default"
               >
                 {tag}
               </span>
