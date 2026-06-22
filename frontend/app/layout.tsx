@@ -20,21 +20,7 @@ export const metadata: Metadata = {
     'Asistente de branding con IA. Definí tu idea, elegí el tono de tu marca y obtené una propuesta visual completa: brief creativo, paleta, tipografías y user persona.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/favicon.png',
   },
 }
 
@@ -54,11 +40,24 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} bg-background`}
     >
       <body className="font-sans antialiased min-h-screen flex flex-col justify-between">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for (var i = 0; i < registrations.length; i++) {
+                    registrations[i].unregister();
+                  }
+                });
+              }
+            `,
+          }}
+        />
         <div className="flex-1 flex flex-col">
           {children}
         </div>
         <SiteFooter />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && process.env.VERCEL === '1' && <Analytics />}
       </body>
     </html>
   )

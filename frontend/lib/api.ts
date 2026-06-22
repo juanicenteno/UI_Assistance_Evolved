@@ -1,6 +1,6 @@
 import type { BriefResult, FormState } from "./brief-data"
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || ""
 
 function mapFormToPayload(form: FormState): Record<string, unknown> {
   return {

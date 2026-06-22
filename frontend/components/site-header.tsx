@@ -49,7 +49,7 @@ export function SiteHeader({ onReset }: { onReset?: () => void }) {
             Mis Briefs
           </Link>
           <a
-            href="mailto:hola@aibrief.studio"
+            href="mailto:juanignaciocenteno5@gmail.com"
             className="ml-2 rounded-xl bg-secondary/60 border border-border/60 hover:bg-secondary/80 hover:border-primary/20 px-4 py-2 text-sm font-semibold text-foreground transition-all flex items-center gap-1.5"
           >
             <Mail className="size-3.5" />
