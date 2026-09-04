@@ -49,7 +49,7 @@ router.get("/:id", async (req, res) => {
     try {
         const [rows] = await pool.query("SELECT data, status FROM briefs WHERE id = ?", [id]);
         if (rows.length === 0) return res.status(404).json({ error: "No encontrado" });
-        const brief = JSON.parse(rows[0].data);
+        const brief = typeof rows[0].data === "string" ? JSON.parse(rows[0].data) : rows[0].data;
         res.json({ ...brief, status: rows[0].status });
     } catch (error) {
         console.error("❌ Error al obtener brief:", error.message);
@@ -72,7 +72,7 @@ router.post("/:id/refinar", async (req, res) => {
             return res.status(404).json({ error: "Brief no encontrado" });
         }
 
-        const currentBrief = JSON.parse(rows[0].data);
+        const currentBrief = typeof rows[0].data === "string" ? JSON.parse(rows[0].data) : rows[0].data;
 
         // Crear el prompt para el modelo de lenguaje
         const userPrompt = `Brief actual:

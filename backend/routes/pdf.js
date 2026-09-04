@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
             return res.status(404).send("No se encontró el brief");
         }
 
-        const brief = JSON.parse(rows[0].data);
+        const brief = typeof rows[0].data === "string" ? JSON.parse(rows[0].data) : rows[0].data;
         const hostUrl = `${req.protocol}://${req.get("host")}`;
         const pdfBuffer = await generatePdf(brief, hostUrl);
 

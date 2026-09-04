@@ -2,14 +2,14 @@
 // Llama a la API de Groq (llama-3.3-70b-versatile) con un system prompt y user prompt,
 // y devuelve el contenido como string JSON.
 async function generateBriefGroq(systemPrompt, userPrompt) {
-    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${process.env.GEMINI_API_KEY}`,
+            Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            model: "gemini-3.5-flash",
+            model: "openai/gpt-oss-20b",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: userPrompt },
