@@ -83,9 +83,9 @@ El archivo de esquema [backend/schema.sql](backend/schema.sql) creará una base 
    ```bash
    cd ../frontend
    ```
-2. Asegúrate de tener configurado el archivo `.env.local` indicando la URL del backend (por defecto viene configurado a `http://localhost:4000`):
+2. Asegúrate de tener configurado el archivo `.env.local` indicando la URL del backend (configurado a `http://localhost:4006`):
    ```env
-   NEXT_PUBLIC_API_URL=http://localhost:4000
+   NEXT_PUBLIC_API_URL=http://localhost:4006
    ```
 
 ---
@@ -101,7 +101,7 @@ npm install
 # Iniciar servidor de desarrollo (usa nodemon)
 npm run dev
 ```
-El servidor backend correrá en `http://localhost:4000`.
+El servidor backend correrá en `http://localhost:4006`.
 
 ### Ejecutar el Frontend
 Desde la carpeta `frontend` (en otra pestaña de la terminal):
@@ -112,7 +112,7 @@ npm install # o pnpm install
 # Iniciar servidor de desarrollo de Next.js
 npm run dev
 ```
-La aplicación web estará disponible en `http://localhost:3000`.
+La aplicación web estará disponible en `http://localhost:5173`.
 
 ---
 

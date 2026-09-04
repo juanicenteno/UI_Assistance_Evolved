@@ -9,7 +9,7 @@ async function generateBriefGroq(systemPrompt, userPrompt) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            model: "gemini-3.1-flash-lite",
+            model: "gemini-3.5-flash",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: userPrompt },

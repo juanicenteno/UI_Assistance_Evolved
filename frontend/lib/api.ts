@@ -85,7 +85,7 @@ export async function generateBrief(
 }
 
 export async function fetchBrief(id: string): Promise<BriefResult> {
-  const res = await fetch(`/api/brief/${id}`)
+  const res = await fetch(`${API_URL}/api/brief/${id}`)
 
   if (!res.ok) {
     throw new Error("Error al obtener el brief")
@@ -99,7 +99,7 @@ export async function refineBrief(
   id: string,
   instruction: string
 ): Promise<{ brief: BriefResult; status: string }> {
-  const res = await fetch(`/api/brief/${id}/refinar`, {
+  const res = await fetch(`${API_URL}/api/brief/${id}/refinar`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ instruccion: instruction }),
